@@ -2,117 +2,117 @@
 
 // Add tabs support for textarea
 document.querySelector("textarea").addEventListener("keydown", function(e) {
-	if (e.key === "Tab") {
-		e.preventDefault();
-		const start = this.selectionStart;
-		const end = this.selectionEnd;
+    if (e.key === "Tab") {
+        e.preventDefault();
+        const start = this.selectionStart;
+        const end = this.selectionEnd;
 
-		this.value = this.value.substring(0, start) + "\t" + this.value.substring(end);
-		this.selectionStart = this.selectionEnd = start + 1;
-	}
+        this.value = this.value.substring(0, start) + "\t" + this.value.substring(end);
+        this.selectionStart = this.selectionEnd = start + 1;
+    }
 });
 
 
 function reset() {
-	document.getElementById("found").innerHTML = "";
-	document.getElementById("essay").value = "";
+    document.getElementById("found").innerHTML = "";
+    document.getElementById("essay").value = "";
 }
 
 function check4stuff() {
-	if (document.body.getAttributeNames().includes("loading")) return;
-	try {
-		var text = document.getElementById("essay").value;
-		const lowered = text.toLowerCase();
+    if (document.body.getAttributeNames().includes("loading")) return;
+    try {
+        var text = document.getElementById("essay").value;
+        const lowered = text.toLowerCase();
 
-		document.body.toggleAttribute("loading");
-		document.getElementById("found").innerHTML = "Checking essay...";
+        document.body.toggleAttribute("loading");
+        document.getElementById("found").innerHTML = "Checking essay...";
 
-		let klisheysFound = "";
-		klisheys.forEach(klishey => {
-			if (lowered.includes(klishey.toLowerCase())) {
-				klisheysFound += "<li>" + klishey + "</li>";
-			}
-		});
+        let klisheysFound = "";
+        klisheys.forEach(klishey => {
+            if (lowered.includes(klishey.toLowerCase())) {
+                klisheysFound += "<li>" + klishey + "</li>";
+            }
+        });
 
-		let dedFound = "";
-		deds.forEach(dedWord => {
-			const re = new RegExp(`\\b${dedWord.toLowerCase()}\\b`);
-			if (re.test(lowered)) {
-				dedFound += `<li><a class='word' target=_blank href="https://www.thesaurus.com/browse/${dedWord}">` + dedWord + "</a></li>";
-			}
-		});
+        let dedFound = "";
+        deds.forEach(dedWord => {
+            const re = new RegExp(`\\b${dedWord.toLowerCase()}\\b`);
+            if (re.test(lowered)) {
+                dedFound += `<li><a class='word' target=_blank href="https://www.thesaurus.com/browse/${dedWord}">` + dedWord + "</a></li>";
+            }
+        });
 
-		let kontractionzFound = "";
-		kontractionz.forEach(kontraction => {
-			const re = new RegExp(`${kontraction.toLowerCase()}\\b`);
-			if (re.test(lowered)) {
-				kontractionzFound += "<li>" + kontraction + "</li>";
-			}
-		});
+        let kontractionzFound = "";
+        kontractionz.forEach(kontraction => {
+            const re = new RegExp(`${kontraction.toLowerCase()}\\b`);
+            if (re.test(lowered)) {
+                kontractionzFound += "<li>" + kontraction + "</li>";
+            }
+        });
 
-	    // SHHHH.
-	    setTimeout(function () {
-	    	document.body.toggleAttribute("loading");
+        // SHHHH.
+        setTimeout(function () {
+            document.body.toggleAttribute("loading");
 
-	    	let found = "";
+            let found = "";
 
-	    	if ((klisheysFound + dedFound + kontractionzFound).length == 0) {
-	    		found =  `
-		    		<div class="clean">
-		    		🍪 No clichés, contractions, or dead words found!
-		    		</div>
-	    		`;
-	    		actuallyFire();
-	    	}
+            if ((klisheysFound + dedFound + kontractionzFound).length == 0) {
+                found =  `
+                    <div class="clean">
+                    🍪 No clichés, contractions, or dead words found!
+                    </div>
+                `;
+                actuallyFire();
+            }
 
-	    	if (klisheysFound.length > 0)
-	    		found += "<h3 lighter>Clichés found:</h3>" + klisheysFound;
-	    	if (dedFound.length > 0)
-	    		found += "<h3 lighter>Dead words found:</h3>" + dedFound;
-	    	if (kontractionzFound.length > 0)
-	    		found += "<h3 lighter>Contractions found:</h3>" + kontractionzFound;
+            if (klisheysFound.length > 0)
+                found += "<h3 lighter>Clichés found:</h3>" + klisheysFound;
+            if (dedFound.length > 0)
+                found += "<h3 lighter>Dead words found:</h3>" + dedFound;
+            if (kontractionzFound.length > 0)
+                found += "<h3 lighter>Contractions found:</h3>" + kontractionzFound;
 
-	    	document.getElementById("found").innerHTML = found;
-	    }, 1000);
-	} catch (error) {
-		document.getElementById("found").innerHTML = "<em red>" + error + "</em>";
-	}
+            document.getElementById("found").innerHTML = found;
+        }, 1000);
+    } catch (error) {
+        document.getElementById("found").innerHTML = "<em red>" + error + "</em>";
+    }
 }
 
 // Confetti Options
 const defaults = {
-	origin: { y: 0.7 }
+    origin: { y: 0.7 }
 };
 
 function fire(particleRatio, opts) {
-	confetti(Object.assign({}, defaults, opts, {
-		particleCount: Math.floor(400 * particleRatio)
-	}));
+    confetti(Object.assign({}, defaults, opts, {
+        particleCount: Math.floor(400 * particleRatio)
+    }));
 }
 
 function actuallyFire() {
-	fire(0.25, {
-		spread: 26,
-		startVelocity: 55,
-	});
-	fire(0.2, {
-		spread: 60,
-	});
-	fire(0.35, {
-		spread: 100,
-		decay: 0.91,
-		scalar: 0.8
-	});
-	fire(0.1, {
-		spread: 120,
-		startVelocity: 25,
-		decay: 0.92,
-		scalar: 1.2
-	});
-	fire(0.1, {
-		spread: 120,
-		startVelocity: 45,
-	});   
+    fire(0.25, {
+        spread: 26,
+        startVelocity: 55,
+    });
+    fire(0.2, {
+        spread: 60,
+    });
+    fire(0.35, {
+        spread: 100,
+        decay: 0.91,
+        scalar: 0.8
+    });
+    fire(0.1, {
+        spread: 120,
+        startVelocity: 25,
+        decay: 0.92,
+        scalar: 1.2
+    });
+    fire(0.1, {
+        spread: 120,
+        startVelocity: 45,
+    });   
 }
 
 

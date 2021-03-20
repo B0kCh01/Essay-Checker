@@ -1,6 +1,6 @@
-
 * {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 body {
@@ -31,10 +31,10 @@ body {
 }
 
 .title h1 {
+  margin: 0;
   -webkit-transform: translateX(-32px);
           transform: translateX(-32px);
   line-height: 1;
-  margin: 0;
 }
 
 .loads {
@@ -69,9 +69,9 @@ a {
 }
 
 hr {
-  border: none;
   display: block;
   height: 1px;
+  border: none;
   border-radius: 99px;
   background: black;
   opacity: 0.1;
@@ -87,9 +87,9 @@ button {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  padding: 10px;
   outline: 0;
   border: 0;
-  padding: 10px;
   border-radius: 10px;
   background: #e9e9e9;
   -webkit-transition: all 0.3s cubic-bezier(0.13, 0.83, 0.12, 0.83);
@@ -124,16 +124,17 @@ pre {
 }
 
 .clean {
-  background: #18a8373b;
   padding: 25px;
+  background: #18a8373b;
   border-radius: 10px;
 }
+
 textarea {
   width: 100%;
-  background: rgb(233, 233, 233);
+  padding: 20px;
+  background: #e9e9e9;
   border: 0px;
   border-radius: 10px;
-  padding: 20px;
   resize: none;
   outline: 0;
   margin-bottom: 10px;
